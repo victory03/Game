@@ -1,0 +1,65 @@
+<h1>Game</h1>
+<body>
+
+<br>
+<input type="button" value="night" onclick="
+var a = document.querySelector('body')
+if(this.value === 'night'){
+  a.style.backgroundColor = 'black';
+  a.style.color = 'white';
+  this.value = 'day'
+}
+else{
+  a.style.backgroundColor = 'white';
+  a.style.color = 'black';
+  this.value = 'night'
+}
+">
+  <canvas id="myCanvas" width="460" height="500"></canvas>
+
+<script>
+function game() {
+  var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+var ballRadius = 10;
+var x = canvas.width/30;
+var y = canvas.height-100;
+var dx = 3;
+var dy = 4;
+
+function drawBall() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.beginPath();
+  ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+  ctx.fillStyle = "#0098DD";
+  ctx.fill();
+  ctx.closePath();
+}
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+     drawBall();
+     if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
+        dx = -dx;
+    }
+    if(y + dy > canvas.height-ballRadius || y + dy < ballRadius) {
+        dy = -dy;
+    }
+     x += dx;
+     y += dy;
+
+}
+setInterval(draw, 10);
+}
+
+</script>
+<input type="button" value="Game start" onclick="
+if(this.value === 'Game start'){
+  game();
+  this.value = 'restart'
+}
+else{
+  window.location.reload();
+  this.value = 'Game start'
+}
+"/>
